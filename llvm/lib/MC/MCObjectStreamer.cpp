@@ -344,7 +344,13 @@ void MCObjectStreamer::emitInstruction(const MCInst &Inst,
                                                 "' cannot have instructions");
     return;
   }
+  // 128-bit custom alignment for qubic
+  emitCodeAlignment(Align(16), &STI, 0);
+
   emitInstructionImpl(Inst, STI);
+
+  // 128-bit custom alignment for qubic
+  emitCodeAlignment(Align(16), &STI, 0);
 }
 
 void MCObjectStreamer::emitInstructionImpl(const MCInst &Inst,
